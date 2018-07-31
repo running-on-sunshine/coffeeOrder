@@ -1,0 +1,23 @@
+/* .customerOrder {
+    display: flex;
+    justify-content: space-between;
+} */
+
+.incomingOrders {
+    display: flex;
+    flex-direction: column;
+}
+
+.customerOrder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid gray;
+    
+    /* Styling for now until we figure out how to style this better */
+    padding-left: 10px;
+}
+
+.submitButton {
+    margin-left: 2em;
+}
