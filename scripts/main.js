@@ -4,50 +4,54 @@ var flavorShot = document.querySelector('[name="flavor"]');
 var strengthLevel = document.querySelector('[name="strength"]');
 var incomingOrders = document.querySelector('.incomingOrders');
 
-var coffeeOrderForm = document.querySelector('.coffeeOrderForm');
-coffeeOrderForm.addEventListener('submit', function(event) {
-    event.preventDefault();
+var orders = [];
 
+var createOrder = function() {
+    var row = document.createElement('div');
+    row.classList.add('coffeeOrder');
     var size = document.querySelector('[name="size"]:checked');
-    var coffeeOrder = `${coffee.value}, ${size.value}, ${flavorShot.value}, ${strengthLevel.value}`;
-    var coffeeOrderContact = `${email.value}`;
+    var coffeeOrder = `${coffee.value}, email: ${email.value}, ${size.value}, ${flavorShot.value}, ${strengthLevel.value}`;
+    row.textContent = coffeeOrder;
+    orders.push(coffeeOrder);
 
-    var row;
-    var customerOrder;
-    var completeOrderSection;
-    var completeCheckbox;
-    var completeButton;
-    var orders = [];
-    
-    var createOrder = function() {
-        row = document.createElement('div');
-        row.classList.add('customerOrder');
-        row.textContent = `Coffee Order: ${coffeeOrder} | Contact: ${coffeeOrderContact}`;
-        customerOrder = `coffee: ${coffee.value}, email: ${email.value}, size: ${size.value}, flavor: ${flavorShot.value}, strength: ${strengthLevel.value}`;
-        orders.push(customerOrder);
+    var orderCompletedSection = document.createElement('div');
+    orderCompletedSection.classList.add('orderCompletedSection');
 
-        completeOrderSection = document.createElement('div');
-        completeOrderSection.classList.add('completeOrderSection');
-        
-        completeCheckbox = document.createElement('input');
-        completeCheckbox.setAttribute('type', 'checkbox');
-
-        completeButton = document.createElement('button');
+    var createButton = function () {
+        var completeButton = document.createElement('button');
         completeButton.setAttribute('type', 'submit');
-        completeButton.classList.add('submitButton')
+        completeButton.classList.add('completeButton')
         completeButton.textContent = 'Order Completed!';
+        orderCompletedSection.appendChild(completeButton);
+        completeButton.addEventListener('click', removeOrder);
+    };
 
-        completeOrderSection.appendChild(completeCheckbox);
-        completeOrderSection.appendChild(completeButton);
-        row.appendChild(completeOrderSection);
-        incomingOrders.appendChild(row);
-    }
-
-    var updateOrder = function () {
+    var saveOrder = function () {
         localStorage.setItem('coffee-orders', JSON.stringify(orders));
     };
 
+    var removeOrder = function () {
+        incomingOrders.removeChild(row);
+    }
+
+    row.appendChild(orderCompletedSection);
+    incomingOrders.appendChild(row);
+
+    createButton();
+    saveOrder();
+};
+
+var coffeeOrderForm = document.querySelector('.coffeeOrderForm');
+
+coffeeOrderForm.addEventListener('submit', function(event) {
+    event.preventDefault();
     createOrder();
-    updateOrder();
-    
 });
+
+// var retrieveOrder = function () {
+//     var orderString = localStorage.getItem('coffee-orders');
+//     orders = JSON.parse(orderString);
+//     for (var i = 0; i < orders.length; i++) {
+//         createOrder(orders[i]);
+//     }
+// };
