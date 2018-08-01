@@ -1,5 +1,5 @@
-var incomingOrders = document.querySelector('.incomingOrders');
 var coffeeOrderForm = document.querySelector('.coffeeOrderForm');
+var incomingOrders = document.querySelector('.incomingOrders');
 var orders = [];
 var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
 
@@ -7,7 +7,6 @@ var retrieveOrders = function () {
     orders = []
     $.ajax(url, {
         success: function (data) {
-            console.log(data);
             for (key in data) {
                 orders.push(data[key]);
             }
@@ -32,7 +31,6 @@ var removeOrder = function (order) {
     $.ajax(url + "/" + order.emailAddress, {
         method: 'DELETE',
         success: function () {
-            console.log('I work');
             retrieveOrders();
         }
     })
@@ -62,16 +60,6 @@ var ordersSummaryContainer= function (order) {
     return ordersContainer;
 };
 
-var orderSummary = function (order) {
-    var coffeeOrder = `${order.coffee}, ${order.emailAddress}, ${order.size}, ${order.flavor}, ${order.strength}`;
-
-    var row = document.createElement('div');
-    row.classList.add('coffee-order');
-    row.textContent = coffeeOrder;
-
-    return row;
-};
-
 var buildButton = function (order) {
     var buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
@@ -91,6 +79,16 @@ var buildButton = function (order) {
     buttonContainer.appendChild(completeButton);
     
     return buttonContainer;
+};
+
+var orderSummary = function (order) {
+    var coffeeOrder = `${order.coffee}, ${order.emailAddress}, ${order.size}, ${order.flavor}, ${order.strength}`;
+
+    var row = document.createElement('div');
+    row.classList.add('coffee-order');
+    row.textContent = coffeeOrder;
+
+    return row;
 };
 
 coffeeOrderForm.addEventListener('submit', function(event) {
