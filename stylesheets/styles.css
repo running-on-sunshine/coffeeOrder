@@ -8,16 +8,18 @@
     flex-direction: column;
 }
 
-.customerOrder {
+.orders-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border: 1px solid gray;
     
     /* Styling for now until we figure out how to style this better */
     padding-left: 10px;
 }
 
-.submitButton {
-    margin-left: 2em;
+.order-completed {
+    background-color: rgb(177, 216, 169);
 }
