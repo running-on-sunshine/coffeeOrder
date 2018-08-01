@@ -1,3 +1,4 @@
+var coffeeOrderForm = document.querySelector('.coffeeOrderForm');
 var incomingOrders = document.querySelector('.incomingOrders');
 var orders = [];
 var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
@@ -13,6 +14,8 @@ var retrieveOrders = function () {
         }
     })
 };
+
+retrieveOrders();
 
 var addOrder = function (newOrder) {
     $.ajax(url, {
@@ -87,8 +90,6 @@ var orderSummary = function (order) {
 
     return row;
 };
-
-var coffeeOrderForm = document.querySelector('.coffeeOrderForm');
 
 coffeeOrderForm.addEventListener('submit', function(event) {
     event.preventDefault();
