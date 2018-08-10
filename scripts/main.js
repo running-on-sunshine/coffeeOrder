@@ -4,36 +4,36 @@ var orders = [];
 var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
 
 var retrieveOrders = function () {
-    orders = []
-    $.ajax(url, {
-        success: function (data) {
+    orders = [];
+    fetch(url).then(function (data) {
+        data.json().then(function (data) {
             for (key in data) {
                 orders.push(data[key]);
             }
             displayOrders();
-        }
-    })
+        });
+    });
 };
-
 retrieveOrders();
 
 var addOrder = function (newOrder) {
-    $.ajax(url, {
-        method: 'POST', 
-        data: newOrder,
-        success: function () {
-            retrieveOrders();
+    fetch(url, {
+        method: "post",
+        body: JSON.stringify(newOrder),
+        headers: {
+            "Content-Type": "application/json",
         }
-    })
+    }).then(function () {
+        retrieveOrders();
+    });
 };
 
 var removeOrder = function (order) {
-    $.ajax(url + "/" + order.emailAddress, {
-        method: 'DELETE',
-        success: function () {
-            retrieveOrders();
-        }
-    })
+    fetch(url + "/" + order.emailAddress, {
+        method: "delete",
+    }).then(function () {
+        retrieveOrders();
+    });
 };
 
 var clearDisplay = function () {
