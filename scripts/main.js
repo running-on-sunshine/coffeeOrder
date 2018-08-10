@@ -4,17 +4,18 @@ var orders = [];
 var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
 
 var retrieveOrders = function () {
-    orders = []
-    $.ajax(url, {
-        success: function (data) {
+    var retrieveOrdersPromise = fetch(url);
+    retrieveOrdersPromise.then(function (data) {
+        orders = []
+        var ordersToJson = data.json();
+        ordersToJson.then(function (data) {
             for (key in data) {
                 orders.push(data[key]);
             }
             displayOrders();
-        }
+        })
     })
-};
-
+}
 retrieveOrders();
 
 var addOrder = function (newOrder) {
