@@ -4,18 +4,16 @@ var orders = [];
 var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
 
 var retrieveOrders = function () {
-    var retrieveOrdersPromise = fetch(url);
-    retrieveOrdersPromise.then(function (data) {
-        orders = []
-        var ordersToJson = data.json();
-        ordersToJson.then(function (data) {
+    orders = [];
+    fetch(url).then(function (data) {
+        data.json().then(function (data) {
             for (key in data) {
                 orders.push(data[key]);
             }
             displayOrders();
-        })
-    })
-}
+        });
+    });
+};
 retrieveOrders();
 
 var addOrder = function (newOrder) {
@@ -27,7 +25,7 @@ var addOrder = function (newOrder) {
         }
     }).then(function () {
         retrieveOrders();
-    })
+    });
 };
 
 var removeOrder = function (order) {
@@ -35,7 +33,7 @@ var removeOrder = function (order) {
         method: "delete",
     }).then(function () {
         retrieveOrders();
-    })
+    });
 };
 
 var clearDisplay = function () {
