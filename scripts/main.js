@@ -19,12 +19,14 @@ var retrieveOrders = function () {
 retrieveOrders();
 
 var addOrder = function (newOrder) {
-    $.ajax(url, {
-        method: 'POST', 
-        data: newOrder,
-        success: function () {
-            retrieveOrders();
+    fetch(url, {
+        method: "post",
+        body: JSON.stringify(newOrder),
+        headers: {
+            "Content-Type": "application/json",
         }
+    }).then(function () {
+        retrieveOrders();
     })
 };
 
