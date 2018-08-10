@@ -31,11 +31,10 @@ var addOrder = function (newOrder) {
 };
 
 var removeOrder = function (order) {
-    $.ajax(url + "/" + order.emailAddress, {
-        method: 'DELETE',
-        success: function () {
-            retrieveOrders();
-        }
+    fetch(url + "/" + order.emailAddress, {
+        method: "delete",
+    }).then(function () {
+        retrieveOrders();
     })
 };
 
