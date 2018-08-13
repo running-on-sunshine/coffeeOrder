@@ -1,23 +1,71 @@
-/* .customerOrder {
-    display: flex;
-    justify-content: space-between;
-} */
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+    background: #ffe259;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffa751, #ffe259);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffa751, #ffe259); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Signika', sans-serif;
+}
 
-.incomingOrders {
+h1 {
+    font-family: 'Pacifico', cursive;
+}
+
+.panel {
+    margin: 2.5em 0;
+    border-radius: 0.5em;
+    border: 0.5em solid peachpuff;
+}
+
+.coffee-order-form {
+    font-size: 1.6em;
+}
+
+.size {
+    border: 0.1em solid lightgray;
+    border-radius: 0.3em;
+    margin: 0.3em 0 0.7em;
+}
+
+input[type=radio] {
+    margin: 0.5em 0.3em 0 0.5em;
+}
+
+p {
+    margin: 0;
+}
+.button {
+    padding: 0.3em 0.7em;
+    border-radius: 0.5em;
+    margin: 0 0.3em 0 0;
+    outline: none;
+}
+
+.orders-list {
     display: flex;
     flex-direction: column;
 }
 
 .orders-container {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border: 1px solid gray;
-    
-    /* Styling for now until we figure out how to style this better */
-    padding-left: 10px;
+    align-items: center;
+    font-size: 1.4em;
+    padding: 1em;
+    border-radius: 0.3em;
+    border: 0.3em solid darkseagreen;
+    margin: 0.1em;
+}
+
+.complete-button {
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.button:hover, .complete-button:hover {
+    border: 0.2em solid gold;
+    background-color: rgb(255, 182, 153);
 }
 
 .order-completed {

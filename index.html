@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>coffeerun</title>
+    <title>coffeeRun</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Signika" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/styles.css"/>
   </head>
   <body class="container">
@@ -11,9 +12,9 @@
       <h1>CoffeeRun</h1>
     </header>
     <section>
-      <div class="panel panel-default">
+      <div class="panel">
         <div class="panel-body">
-          <form class="coffeeOrderForm">
+          <form class="coffee-order-form">
             <div class="form-group">
               <label for="coffeeOrder">Coffee Order</label>
               <input class="form-control coffeeOrder" name="coffee" autofocus>
@@ -22,27 +23,26 @@
               <label for="emailInput">Email</label>
               <input class="form-control emailInput" type="email" name="emailAddress" value="" placeholder="dr@who.com">
             </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="size" value="short">
-                Short
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="size" value="tall">
-                Tall
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="size" value="grande">
-                Grande
-              </label>
+            <div class-="form-group">
+              <label for="size">Size</label>
+              <div class="size">
+                <p>
+                  <input type="radio" name="size" value="short">
+                  <label for="size_short"> Short</label>
+                </p>
+                <p>
+                  <input type="radio" name="size" value="tall">
+                  <label for="size_tall"> Tall</label>
+                </p>
+                <p>
+                  <input type="radio" name="size" value="grande">
+                  <label for"size_grande"> Grande</label>
+                </p>
+              </div>
             </div>
             <div class="form-group">
               <label for="flavorShot">Flavor Shot</label>
-              <select class="form-control flavorShot" name="flavor">
+              <select class="form-control flavor" name="flavor">
                 <option value="none">None</option>
                 <option value="caramel">Caramel</option>
                 <option value="almond">Almond</option>
@@ -53,19 +53,16 @@
               <label for="strengthLevel">Caffeine Rating</label>
               <input name="strength" type="range" value="30">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-            <button type="reset" class="btn btn-default">Reset</button>
+            <button type="submit" class="button">Submit</button>
+            <button type="reset" class="button">Reset</button>
           </form>
         </div>
       </div>
     </section>
-    <div class="panel panel-default">
+    <div class="panel">
         <div class="panel-body">
-          <div class="orderList">
-            <h5>Pending Orders</h5>
-            <div class="incomingOrders">
-            </div>
-          <div>
+          <h4>Orders</h4>
+          <div class="orders-list"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

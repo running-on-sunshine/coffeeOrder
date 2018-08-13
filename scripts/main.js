@@ -1,5 +1,5 @@
-var coffeeOrderForm = document.querySelector('.coffeeOrderForm');
-var incomingOrders = document.querySelector('.incomingOrders');
+var coffeeOrderForm = document.querySelector('.coffee-order-form');
+var ordersList = document.querySelector('.orders-list');
 var orders = [];
 var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
 
@@ -46,7 +46,7 @@ var clearDisplay = function () {
 var displayOrders = function () {
     clearDisplay();
     orders.forEach(function (order) {
-        incomingOrders.appendChild(ordersSummaryContainer(order));
+        ordersList.appendChild(ordersSummaryContainer(order));
     })
 };
 
@@ -66,7 +66,7 @@ var buildButton = function (order) {
 
     var completeButton = document.createElement('button');
     completeButton.setAttribute('type', 'submit');
-    completeButton.classList.add('complete-button')
+    completeButton.classList.add('complete-button');
     completeButton.textContent = 'Order Completed!';
     completeButton.addEventListener('click', function(){
         this.parentElement.parentElement.classList.add('order-completed');
