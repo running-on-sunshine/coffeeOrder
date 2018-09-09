@@ -1,12 +1,12 @@
-var coffeeOrderForm = document.querySelector('.coffee-order-form');
-var ordersList = document.querySelector('.orders-list');
-var orders = [];
-var url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
+let coffeeOrderForm = document.querySelector('.coffee-order-form');
+let ordersList = document.querySelector('.orders-list');
+let orders = [];
+let url = 'https://dc-coffeerun.herokuapp.com/api/coffeeorders';
 
-var retrieveOrders = function () {
+let retrieveOrders = ()  => {
     orders = [];
-    fetch(url).then(function (data) {
-        data.json().then(function (data) {
+    fetch(url).then((data) => {
+        data.json().then((data) => {
             for (key in data) {
                 orders.push(data[key]);
             }
@@ -16,42 +16,42 @@ var retrieveOrders = function () {
 };
 retrieveOrders();
 
-var addOrder = function (newOrder) {
+let addOrder = (newOrder) => {
     fetch(url, {
         method: "post",
         body: JSON.stringify(newOrder),
         headers: {
             "Content-Type": "application/json",
         }
-    }).then(function () {
+    }).then(() => {
         retrieveOrders();
     });
 };
 
-var removeOrder = function (order) {
+let removeOrder = (order) => {
     fetch(url + "/" + order.emailAddress, {
         method: "delete",
-    }).then(function () {
+    }).then(() => {
         retrieveOrders();
     });
 };
 
-var clearDisplay = function () {
-    var orderScreen = document.querySelectorAll('.orders-container');
-    orderScreen.forEach(function (item) {
+let clearDisplay = () => {
+    let orderScreen = document.querySelectorAll('.orders-container');
+    orderScreen.forEach((item) => {
         item.remove();
     })
 };
 
-var displayOrders = function () {
+let displayOrders = () => {
     clearDisplay();
-    orders.forEach(function (order) {
+    orders.forEach((order) => {
         ordersList.appendChild(ordersSummaryContainer(order));
     })
 };
 
-var ordersSummaryContainer= function (order) {
-    var ordersContainer = document.createElement('div');
+let ordersSummaryContainer= (order) => {
+    let ordersContainer = document.createElement('div');
     ordersContainer.classList.add('orders-container');
 
     ordersContainer.appendChild(orderSummary(order));
@@ -60,18 +60,18 @@ var ordersSummaryContainer= function (order) {
     return ordersContainer;
 };
 
-var buildButton = function (order) {
-    var buttonContainer = document.createElement('div');
+let buildButton = (order) => {
+    let buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
 
-    var completeButton = document.createElement('button');
+    let completeButton = document.createElement('button');
     completeButton.setAttribute('type', 'submit');
     completeButton.classList.add('complete-button');
     completeButton.textContent = 'Order Completed!';
-    completeButton.addEventListener('click', function(){
+    completeButton.addEventListener('click', () => {
         this.parentElement.parentElement.classList.add('order-completed');
         this.remove();
-        setTimeout(function() {
+        setTimeout(() => {
             removeOrder(order);
         }, 2000);
     });
@@ -81,25 +81,25 @@ var buildButton = function (order) {
     return buttonContainer;
 };
 
-var orderSummary = function (order) {
-    var coffeeOrder = `${order.coffee}, ${order.emailAddress}, ${order.size}, ${order.flavor}, ${order.strength}`;
+let orderSummary = (order) => {
+    let coffeeOrder = `${order.coffee}, ${order.emailAddress}, ${order.size}, ${order.flavor}, ${order.strength}`;
 
-    var row = document.createElement('div');
+    let row = document.createElement('div');
     row.classList.add('coffee-order');
     row.textContent = coffeeOrder;
 
     return row;
 };
 
-coffeeOrderForm.addEventListener('submit', function(event) {
+coffeeOrderForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    var coffee = document.querySelector('[name="coffee"]');
-    var email = document.querySelector('[name="emailAddress"]');
-    var flavor = document.querySelector('[name="flavor"]');
-    var strength = document.querySelector('[name="strength"]');
-    var size = document.querySelector('[name="size"]:checked');
+    let coffee = document.querySelector('[name="coffee"]');
+    let email = document.querySelector('[name="emailAddress"]');
+    let flavor = document.querySelector('[name="flavor"]');
+    let strength = document.querySelector('[name="strength"]');
+    let size = document.querySelector('[name="size"]:checked');
 
-    var newOrder = {
+    let newOrder = {
         "coffee": coffee.value,
         "emailAddress": email.value,
         "flavor": flavor.value,
